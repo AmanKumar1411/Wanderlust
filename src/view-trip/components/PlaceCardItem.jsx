@@ -7,21 +7,23 @@ function PlaceCardItem({ place }) {
   const [photoUrl, setPhotoUrl] = useState();
 
   useEffect(() => {
-    place && GetPlaceImg();
-  }, [place]);
-
-  const GetPlaceImg = async () => {
-    const data = {
-      textQuery: place.placeName,
-    };
-    const result = await GetPlaceDetails(data).then((resp) => {
+    const getPlaceImg = async () => {
+      const data = {
+        textQuery: place.placeName,
+      };
+      const resp = await GetPlaceDetails(data);
       const PhotoUrl = PHOTO_REF_URL.replace(
         "{NAME}",
-        resp.data.places[0].photos[3].name
+        resp.data.places[0].photos[3].name,
       );
       setPhotoUrl(PhotoUrl);
-    });
-  };
+    };
+
+    if (place) {
+      getPlaceImg();
+    }
+  }, [place]);
+
   return (
     <div>
       <Link
@@ -36,7 +38,7 @@ function PlaceCardItem({ place }) {
         <div className="my-4 bg-gray-50 p-2 gap-2 border rounded-lg flex flex-cols-2 hover:scale-105 transition-all hover:shadow-md cursor-pointer ">
           <div className="py-2 mx-3">
             <img
-              src={photoUrl ? photoUrl : "/public/road-trip-vacation.jpg"}
+              src={photoUrl ? photoUrl : "/light.png"}
               className="w-[140px] h-[140px] rounded-xl object-cover"
             />
           </div>

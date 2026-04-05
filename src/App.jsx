@@ -1,14 +1,9 @@
-import React from 'react';
-import './App.css'
-import Hero from './components/custom/Hero'
+import React from "react";
+import "./App.css";
+import HomePage from "./components/custom/home/HomePage";
 
 function App() {
-  
-  return (
-    <>
-      <Hero/>
-    </>
-  )
+  return <HomePage />;
 }
 
-export default App
+export default App;
